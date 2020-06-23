@@ -1,4 +1,4 @@
-package Interfaces;
+package Models.Interfaces;
 
 public interface GameActions {
 

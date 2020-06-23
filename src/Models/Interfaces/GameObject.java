@@ -1,4 +1,4 @@
-package Interfaces;
+package Models.Interfaces;
 import java.awt.image.BufferedImage;
 
 public interface GameObject {
