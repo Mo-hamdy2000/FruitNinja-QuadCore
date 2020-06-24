@@ -3,20 +3,24 @@ package Models;
 import Models.Interfaces.GameActions;
 import Models.Interfaces.GameObject;
 
-public class GameAction implements GameActions {
+public class GameLogic implements GameActions {
 
-	private GameAction instance;
+	private GameLogic instance;
+	private GameProperties gameProperties;
 
-	private GameAction() {
+	private GameLogic() {
 		if (instance != null)
 			throw new RuntimeException("use getInstance method");
 	}
 
-	public GameAction getInstance() {
+	public GameLogic getInstance() {
 		if (instance == null) {
-			synchronized (GameAction.class) {
-				if (instance == null)
-					instance = new GameAction();
+			synchronized (GameLogic.class) {
+				if (instance == null) {
+					instance = new GameLogic();
+					gameProperties=new GameProperties();
+					
+				}
 
 			}
 		} 
