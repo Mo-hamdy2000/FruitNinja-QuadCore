@@ -1,10 +1,15 @@
 package Models;
 
-import java.awt.image.BufferedImage;
-
 import Models.Interfaces.GameObject;
 
-public class Fruit implements GameObject{
+import java.awt.image.BufferedImage;
+
+public class Fruit implements GameObject {
+
+	protected BufferedImage image_right, image_left, image;
+	private final double rotationAngle = Math.PI / 20; //change this to control rotation speed
+	private int timesRotated = 0;
+	private final boolean okToRotate = timesRotated * rotationAngle <= Math.PI / 2;
 
 	@Override
 	public Enum<?> getObjectType() {
@@ -62,8 +67,9 @@ public class Fruit implements GameObject{
 
 	@Override
 	public void move(double time) {
+		if (this.isSliced() && this.okToRotate) this.nextSlicedFrame();
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -72,4 +78,10 @@ public class Fruit implements GameObject{
 		return null;
 	}
 
+	private void nextSlicedFrame() {
+		timesRotated++;
+		image_left = MiscUtils.rotateLeft(image_left, rotationAngle);
+		image_right = MiscUtils.rotateRight(image_right, rotationAngle);
+		image = MiscUtils.concat(image_left, image_right);
+	}
 }

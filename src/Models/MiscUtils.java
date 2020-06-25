@@ -1,5 +1,7 @@
 package Models;
 
+import javafx.scene.control.Alert;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -8,8 +10,16 @@ import java.awt.image.BufferedImage;
 public class MiscUtils {
     public static double rand(double min, double max) {
         double range = max - min;
-        double rand = (Math.random() * range) + min;
-        return rand;
+        return (Math.random() * range) + min;
+    }
+
+    public static void fileNotFound() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("File not found!");
+        alert.setContentText("Oops! It looks like a file has been deleted.");
+        alert.showAndWait();
+        System.exit(0);
     }
 
     public static BufferedImage rotateRight(BufferedImage bufferedImage, double angle) {

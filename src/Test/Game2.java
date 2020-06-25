@@ -23,8 +23,8 @@ public class Game2 extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Pane root = new Pane();
-        BufferedImage right = ImageIO.read(new File("src/resources/fruits/Watermelon_right.png"));
-        BufferedImage left = ImageIO.read(new File("src/resources/fruits/Watermelon_left.png"));
+        BufferedImage right = ImageIO.read(new File("src/resources/fruits/pineapple_right.png"));
+        BufferedImage left = ImageIO.read(new File("src/resources/fruits/pineapple_left.png"));
         for (int i = 0; i < 3; i++) {
             right = MiscUtils.rotateRight(right, Math.PI / 20);
             left = MiscUtils.rotateLeft(left, Math.PI / 20);
