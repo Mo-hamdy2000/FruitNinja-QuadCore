@@ -43,7 +43,7 @@ public class GameLogic implements GameActions {
 			factory=new BombFactory();
 			obj=factory.createObject(object);
 		}
-	System.out.println(index);
+	//System.out.println(index);
 		return obj;
 	}
 
