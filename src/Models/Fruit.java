@@ -10,6 +10,7 @@ public class Fruit implements GameObject {
 	private final double rotationAngle = Math.PI / 20; //change this to control rotation speed
 	private int timesRotated = 0;
 	private final boolean okToRotate = timesRotated * rotationAngle <= Math.PI / 2;
+	// Default values for x and  y just for testing saving and load --MO2--
 	int x = 10;
 	int y = 20;
 	GameObjects objectType;

@@ -15,7 +15,15 @@ public class GameProperties {
 	{
 		
 	}
-
+	
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	public int getLives() {
 		return lives;
 	}

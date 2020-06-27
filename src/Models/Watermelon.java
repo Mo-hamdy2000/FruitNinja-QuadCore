@@ -8,6 +8,7 @@ public class Watermelon extends Fruit {
 	
 	public Watermelon() {
 		this.objectType = GameObjects.Watermelon;
+		// Commented the part below just for testing --MO2--
 		/*try {
             this.image = ImageIO.read(new File("src/resources/fruits/watermelon.png"));
             this.image_left = ImageIO.read(new File("src/resources/fruits/watermelon_left.png"));

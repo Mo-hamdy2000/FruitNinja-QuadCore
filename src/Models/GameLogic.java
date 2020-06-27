@@ -13,6 +13,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import Models.Interfaces.GameActions;
 import Models.Interfaces.GameObject;
@@ -21,7 +23,10 @@ public class GameLogic implements GameActions {
 
 	private static GameLogic instance;
 	private static GameProperties gameProperties;
-	private static ArrayList<GameObject> objectsList;
+	private ArrayList<GameObject> objectsList;
+	
+	// This member will be used by the controller to  determine file to save in it or load from it --MO2--
+	private String targetFileName;
 	
 	private GameLogic() {
 		if (instance != null)
@@ -80,18 +85,14 @@ public class GameLogic implements GameActions {
 	@Override
 	public void saveGame() {
 		
-		//String fileName = saveFileSelection();
-		String fileName = "file1.xml"; 
+		this.targetFileName = "file1.xml"; 
 		String sep = System.getProperty("file.separator");
-		String xmlFilePath = System.getProperty("user.dir") + sep + "saved_data" + sep + fileName;
+		String xmlFilePath = System.getProperty("user.dir") + sep + "saved_data" + sep + targetFileName;
 		
 		DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 		try {
 	        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-	
 	        Document document = documentBuilder.newDocument();
-	
-	        // root element
 	        Element root = document.createElement("Game");
 	        document.appendChild(root);
 	        
@@ -103,10 +104,11 @@ public class GameLogic implements GameActions {
 	        lives.appendChild(document.createTextNode(gameProperties.getLives() + ""));
 	        root.appendChild(lives);
 	
-	        Element gameObjects = document.createElement("GameObject");
+	        Element gameObjects = document.createElement("GameObjects");
 	        Element gameObject;
 	        for(GameObject obj: objectsList) {
-	        	gameObject = document.createElement(obj.getObjectType().toString());
+	        	gameObject = document.createElement("GameObject");
+	        	gameObject.appendChild(document.createTextNode(obj.getObjectType().toString()));
 	        	Attr attr = document.createAttribute("x");
 	            attr.setValue(obj.getXLocation()+"");
 	            gameObject.setAttributeNode(attr);
@@ -117,11 +119,8 @@ public class GameLogic implements GameActions {
 	            
 	            gameObjects.appendChild(gameObject);
 	        }
-	        
 	        root.appendChild(gameObjects);
-	
-	        // create the xml file
-	        //transform the DOM Object to an XML File
+	        
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer;
 			transformer = transformerFactory.newTransformer();
@@ -138,19 +137,53 @@ public class GameLogic implements GameActions {
 
 	@Override
 	public void loadGame() {
-
+		this.targetFileName = "file1.xml";
+		String sep = System.getProperty("file.separator");
+		String xmlFilePath = System.getProperty("user.dir") + sep + "saved_data" + sep + targetFileName;
+		try {
+			File file = new File(xmlFilePath);    
+			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+	        Document document = documentBuilder.parse(file);  
+			document.getDocumentElement().normalize();  
+			System.out.println("Root element: " + document.getDocumentElement().getNodeName());
+			System.out.println("Score: " + document.getElementsByTagName("Score").item(0).getTextContent());
+			System.out.println("Lives: " + document.getElementsByTagName("Lives").item(0).getTextContent());
+			NodeList nodeList = document.getElementsByTagName("GameObject");    
+			for (int itr = 0; itr < nodeList.getLength(); itr++)   
+			{  
+				Node node = nodeList.item(itr);  
+				Element eElement = (Element) node;
+				// Create Object here --MO2--
+				GameObjects objectType = GameObjects.valueOf(eElement.getTextContent());
+				System.out.println("Type: "+ objectType);
+				System.out.println("X: "+ eElement.getAttribute("x"));
+				System.out.println("Y: "+ eElement.getAttribute("y"));
+				// Then add this object to the objectsList --MO2--
+			}  
+			// Then call Start function here
+		}   
+		catch (Exception e)   
+		{  
+			e.printStackTrace();  
+		} 
 	}
 
 	@Override
 	public void resetGame() {
-
+		this.gameProperties.setLives(3);
+		this.gameProperties.setScore(0);
+		// And reset the time member if it's implemented
+		// Then call Start function here --MO2--
 	}
 
 	public String[] showSavedFiles() {
-		return null;
-	}
-	
-	public String saveFileSelection() {
-		return null;
+		String[] files = null;
+		String sep = System.getProperty("file.separator");
+		File file = new File(System.getProperty("user.dir") + sep + "saved_data");
+		if (file.exists()) {
+			files = file.list();
+		}
+		return files;
 	}
 }

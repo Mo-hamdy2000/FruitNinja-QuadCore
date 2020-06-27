@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Game><Score>0</Score><Lives>3</Lives><GameObject><Apple x="10" y="20"/><Watermelon x="10" y="20"/></GameObject></Game>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Game><Score>0</Score><Lives>3</Lives><GameObjects><GameObject x="10" y="20">Apple</GameObject><GameObject x="10" y="20">Watermelon</GameObject></GameObjects></Game>
