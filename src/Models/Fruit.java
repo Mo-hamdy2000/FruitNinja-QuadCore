@@ -10,23 +10,25 @@ public class Fruit implements GameObject {
 	private final double rotationAngle = Math.PI / 20; //change this to control rotation speed
 	private int timesRotated = 0;
 	private final boolean okToRotate = timesRotated * rotationAngle <= Math.PI / 2;
+	int x = 10;
+	int y = 20;
+	GameObjects objectType;
 
 	@Override
-	public Enum<?> getObjectType() {
-		// TODO Auto-generated method stub
-		return null;
+	public GameObjects getObjectType() {
+		return objectType;
 	}
 
 	@Override
 	public int getXLocation() {
 		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
 	@Override
 	public int getYLocation() {
 		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
 	@Override
