@@ -35,6 +35,7 @@ public class Game1 extends Application {
         launch();
  
     }
+
  
     @Override
     public void start(Stage primaryStage) throws Exception {

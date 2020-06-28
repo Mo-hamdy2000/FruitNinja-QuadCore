@@ -1,11 +1,14 @@
 package Models;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+
+import Models.Interfaces.GameObject;
 
 public class MiscUtils {
     public static double rand(double min, double max) {
@@ -49,5 +52,16 @@ public class MiscUtils {
         g2.drawImage(img2, null, img1.getWidth(), 0);
         g2.dispose();
         return newImage;
+    }
+    
+    public static EventHandler<javafx.scene.input.MouseEvent> assignListener(GameObject gameObject){
+    	EventHandler<javafx.scene.input.MouseEvent> eventHandler=new EventHandler<javafx.scene.input.MouseEvent>() { 
+            @Override 
+            public void handle(javafx.scene.input.MouseEvent e) { 
+               gameObject.slice();           
+            } 
+         };   
+		return eventHandler;
+    	
     }
 }

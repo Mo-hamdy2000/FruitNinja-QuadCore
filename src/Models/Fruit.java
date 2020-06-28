@@ -1,19 +1,18 @@
 package Models;
 
 import Models.Interfaces.GameObject;
+import javafx.scene.image.ImageView;
 
 import java.awt.image.BufferedImage;
 
 public class Fruit implements GameObject {
-
+	
+	protected ImageView currentView;
 	protected BufferedImage image_right, image_left, image;
 	private final double rotationAngle = Math.PI / 20; //change this to control rotation speed
 	private int timesRotated = 0;
 	private final boolean okToRotate = timesRotated * rotationAngle <= Math.PI / 2;
-	// Default values for x and  y just for testing saving and load --MO2--
-	int x = 10;
-	int y = 20;
-	GameObjects objectType;
+	private boolean isSliced=false;
 
 	@Override
 	public GameObjects getObjectType() {
@@ -53,7 +52,7 @@ public class Fruit implements GameObject {
 	@Override
 	public boolean isSliced() {
 		// TODO Auto-generated method stub
-		return false;
+		return isSliced;
 	}
 
 	@Override
@@ -64,21 +63,26 @@ public class Fruit implements GameObject {
 
 	@Override
 	public void slice() {
-		// TODO Auto-generated method stub
 		
+		isSliced=true;
+		System.out.println("isSliced equals " + isSliced);
 	}
 
 	@Override
 	public void move(double time) {
 		if (this.isSliced() && this.okToRotate) this.nextSlicedFrame();
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public BufferedImage[] getBufferedImage() {
-		// TODO Auto-generated method stub
-		return null;
+	    BufferedImage[] bufferedImages=new BufferedImage[4];
+	    bufferedImages[0]=image;
+	    bufferedImages[1]=image_left;
+	    bufferedImages[2]=image_right;
+	    
+		return bufferedImages;
 	}
 
 	private void nextSlicedFrame() {
@@ -87,4 +91,12 @@ public class Fruit implements GameObject {
 		image_right = MiscUtils.rotateRight(image_right, rotationAngle);
 		image = MiscUtils.concat(image_left, image_right);
 	}
+	
+	public  ImageView getImageView ()
+	{
+		 
+		return currentView;
+	}
+
+	
 }
