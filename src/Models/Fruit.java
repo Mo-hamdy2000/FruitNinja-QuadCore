@@ -66,7 +66,7 @@ public class Fruit implements GameObject {
 	public void slice() {
 		
 		isSliced=true;
-		System.out.println("isSliced equals" + isSliced);
+		System.out.println("isSliced equals " + isSliced);
 	}
 
 	@Override
