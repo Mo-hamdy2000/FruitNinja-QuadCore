@@ -72,4 +72,5 @@ public class GameLogic implements GameActions {
 	public void resetGame() {
 
 	}
+}
 
