@@ -176,7 +176,6 @@ public class GameLogic implements GameActions {
 		// And reset the time member if it's implemented
 		// Then call Start function here --MO2--
 	}
-}
 
 	public String[] showSavedFiles() {
 		String[] files = null;

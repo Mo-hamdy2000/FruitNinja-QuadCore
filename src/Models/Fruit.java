@@ -13,6 +13,7 @@ public class Fruit implements GameObject {
 	private int timesRotated = 0;
 	private final boolean okToRotate = timesRotated * rotationAngle <= Math.PI / 2;
 	private boolean isSliced=false;
+	protected GameObjects objectType;
 
 	@Override
 	public GameObjects getObjectType() {
@@ -22,13 +23,13 @@ public class Fruit implements GameObject {
 	@Override
 	public int getXLocation() {
 		// TODO Auto-generated method stub
-		return x;
+		return 0;
 	}
 
 	@Override
 	public int getYLocation() {
 		// TODO Auto-generated method stub
-		return y;
+		return 0;
 	}
 
 	@Override
