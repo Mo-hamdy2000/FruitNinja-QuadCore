@@ -1,5 +1,6 @@
 package Models;
 
+import Models.Interfaces.GameObject;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 
@@ -7,8 +8,6 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-
-import Models.Interfaces.GameObject;
 
 public class MiscUtils {
     public static double rand(double min, double max) {
@@ -39,17 +38,23 @@ public class MiscUtils {
         return op.filter(bufferedImage, null);
     }
 
-    public static BufferedImage concat(BufferedImage img1, BufferedImage img2) {
+    public static BufferedImage concat(BufferedImage img1, BufferedImage img2, int x) {
 
         //do some calculate first
-        int wid = img1.getWidth() + img2.getWidth();
-        int height = Math.max(img1.getHeight(), img2.getHeight());
+        int offset = -5 * x;
+        int wid = img1.getWidth() + img2.getWidth() + offset;
+        int height = Math.max(img1.getHeight(), img2.getHeight()) + offset;
         //create a new buffer and draw two image into the new image
         BufferedImage newImage = new BufferedImage(wid, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = newImage.createGraphics();
+        Color oldColor = g2.getColor();
+        //fill background
+        g2.setPaint(Color.WHITE);
+        g2.fillRect(0, 0, wid, height);
         //draw image
+        g2.setColor(oldColor);
         g2.drawImage(img1, null, 0, 0);
-        g2.drawImage(img2, null, img1.getWidth(), 0);
+        g2.drawImage(img2, null, img1.getWidth() + offset, 0);
         g2.dispose();
         return newImage;
     }

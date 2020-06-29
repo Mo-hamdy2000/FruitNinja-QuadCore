@@ -1,7 +1,8 @@
 package Models;
 
-import java.io.File;
-import java.util.ArrayList;
+import Models.Interfaces.GameActions;
+import Models.Interfaces.GameObject;
+import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -9,15 +10,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import Models.Interfaces.GameActions;
-import Models.Interfaces.GameObject;
+import java.io.File;
+import java.util.ArrayList;
 
 public class GameLogic implements GameActions {
 
@@ -50,24 +44,23 @@ public class GameLogic implements GameActions {
 		}
 		return instance;
 	}
-	
-	
+
+
 	@Override
 	public GameObject createGameObject() {
-	 
+
 		GameObjectfactory factory;
 		GameObject obj;
-		int index=(int) MiscUtils.rand(0,7);
-		GameObjects object=GameObjects.values()[index];
-		if(index<5) {
-			factory=new FruitFactory();
-			obj=factory.createObject(object);
+		int index = (int) MiscUtils.rand(0, 7);
+		GameObjects object = GameObjects.values()[index];
+		if (index < 5) {
+			factory = new FruitFactory();
+			obj = factory.createObject(object);
+		} else {
+			factory = new BombFactory();
+			obj = factory.createObject(object);
 		}
-		else {
-			factory=new BombFactory();
-			obj=factory.createObject(object);
-		}
-	//System.out.println(index);
+		//System.out.println(index);
 		return obj;
 	}
 

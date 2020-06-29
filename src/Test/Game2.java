@@ -30,7 +30,7 @@ public class Game2 extends Application {
             left = MiscUtils.rotateLeft(left, Math.PI / 20);
         }
         root.setStyle("-fx-background-color: black;");
-        Image image = SwingFXUtils.toFXImage(MiscUtils.concat(left, right), null);
+        Image image = SwingFXUtils.toFXImage(right, null);
         ImageView imageView = new ImageView(image);
         root.getChildren().addAll(imageView);
         Scene scene = new Scene(root, 1000, 500);
