@@ -3,6 +3,7 @@ package Test;
 import Models.EasyEquationGenerator;
 import Models.Equation;
 import Models.Fruit;
+import Models.FruitDecorator;
 import Models.Watermelon;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -23,6 +24,7 @@ public class TestSlicing extends Application {
     Pane root = new Pane();
 
     Watermelon watermelon = new Watermelon();
+    FruitDecorator f=new FruitDecorator(watermelon);
     List<Fruit> fruits = new ArrayList<Fruit>();
 
     double mouseX;

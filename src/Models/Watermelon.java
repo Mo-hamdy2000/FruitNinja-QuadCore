@@ -18,10 +18,17 @@ public class Watermelon extends Fruit {
             this.image_right = ImageIO.read(new File("src/resources/fruits/watermelon_right.png"));
             this.currentView = new ImageView(SwingFXUtils.toFXImage(this.image, null));
             this.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
+            System.out.println(this);
 
 
         } catch (IOException e) {
             MiscUtils.fileNotFound();
         }
     }
+
+	@Override
+	public void makeSpecial() {
+		// TODO Auto-generated method stub
+		
+	}
 }

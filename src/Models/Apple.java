@@ -6,4 +6,9 @@ public class Apple extends Fruit{
 		this.objectType = GameObjects.Apple;
 	}
 
+	@Override
+	public void makeSpecial() {
+		
+	}
+
 }

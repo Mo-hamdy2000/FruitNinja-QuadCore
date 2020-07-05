@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 import java.awt.image.BufferedImage;
 
-public class Fruit implements GameObject {
+public abstract class Fruit implements GameObject {
 
     protected ImageView currentView;
     protected BufferedImage image_right, image_left, image;
@@ -15,6 +15,9 @@ public class Fruit implements GameObject {
     private boolean okToRotate = (timesRotated * rotationAngle) <= (Math.PI / 3);
     private boolean isSliced = false;
     protected GameObjects objectType;
+    protected int score;
+    
+    public abstract void makeSpecial();
 
     @Override
     public GameObjects getObjectType() {
@@ -103,6 +106,9 @@ public class Fruit implements GameObject {
 
         return currentView;
     }
+
+
+
 
 
 }

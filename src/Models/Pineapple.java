@@ -14,4 +14,10 @@ public class Pineapple extends Fruit {
             MiscUtils.fileNotFound();
         }
     }
+
+	@Override
+	public void makeSpecial() {
+		// TODO Auto-generated method stub
+		
+	}
 }
