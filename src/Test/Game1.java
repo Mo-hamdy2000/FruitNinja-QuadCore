@@ -1,9 +1,5 @@
 package Test;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
 import Models.EasyEquationGenerator;
 import Models.Equation;
 import javafx.animation.AnimationTimer;
@@ -19,6 +15,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
 public class Game1 extends Application {
    
     AnimationTimer timer;
@@ -117,13 +116,13 @@ public class Game1 extends Application {
         cont.setLayoutX(mouseX);
         
         	if(drop.size() > 0) {
-        		Circle f = (Circle)drop.get(0);
-        		Point p = eq.updateCoordinates((int) c.getLayoutX(), (int)c.getLayoutY());
-        		//System.out.println(p.x);
-        		//System.out.println(p.y);
-        		f.setLayoutX(p.x);
-        		f.setLayoutY(p.y);
-        	}
+                Circle f = (Circle) drop.get(0);
+                //Point p = eq.updateCoordinates((int) c.getLayoutX(), (int)c.getLayoutY());
+                //System.out.println(p.x);
+                //System.out.println(p.y);
+                //f.setLayoutX(p.x);
+                //f.setLayoutY(p.y);
+            }
         	
             //Point p = eq.updateCoordinates((int) c.getLayoutX(), (int)c.getLayoutY());
             //System.out.println(c.getLayoutY() + speed + c.getLayoutY() / 150);

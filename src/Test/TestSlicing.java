@@ -1,10 +1,6 @@
 package Test;
 
-import Models.EasyEquationGenerator;
-import Models.Equation;
-import Models.Fruit;
-import Models.FruitDecorator;
-import Models.Watermelon;
+import Models.*;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -39,6 +35,9 @@ public class TestSlicing extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        EasyEquationGenerator eg = new EasyEquationGenerator(1000, 500);
+        Equation eq = eg.generateEquation();
+        watermelon.setEq(eq);
         fruits.add(watermelon);
 
         speed = 1;
@@ -54,8 +53,7 @@ public class TestSlicing extends Application {
 
         timeline.setCycleCount(1000);
         timeline.play();
-        EasyEquationGenerator eg = new EasyEquationGenerator(1000, 500);
-        Equation eq = eg.generateEquation();
+
 
         timer = new AnimationTimer() {
 
@@ -89,15 +87,7 @@ public class TestSlicing extends Application {
     public void gameUpdate(Equation eq) {
 
         Fruit w = fruits.get(0);
-
-        w.getImageView().setLayoutX(rand(1, 400));
-        w.getImageView().setLayoutY(1);
-
-        p = eq.updateCoordinates((int) (w.getImageView().getLayoutX()), (int) (w.getImageView().getLayoutY()));
-        w.nextSlicedFrame();
-        w.getImageView().setRotate(w.getImageView().getRotate() + 2);
-        w.getImageView().setLayoutX(p.x);
-        w.getImageView().setLayoutY(p.y);
+        w.move(System.currentTimeMillis());
 
     }
 }

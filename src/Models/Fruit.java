@@ -4,19 +4,24 @@ import Models.Interfaces.GameObject;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Fruit implements GameObject {
 
     protected ImageView currentView;
     protected BufferedImage image_right, image_left, image;
-    private final double rotationAngle = Math.PI / 100; //change this to control rotation speed
     private int timesRotated = 0;
-    private boolean okToRotate = (timesRotated * rotationAngle) <= (Math.PI / 3);
     private boolean isSliced = false;
     protected GameObjects objectType;
+    private Equation eq;
     protected int score;
-    
+    private final double startingTime;
+
+    public Fruit() {
+        startingTime = System.currentTimeMillis();
+    }
+
     public abstract void makeSpecial();
 
     @Override
@@ -26,14 +31,13 @@ public abstract class Fruit implements GameObject {
 
     @Override
     public int getXLocation() {
-        // TODO Auto-generated method stub
-        return 0;
+        return (int) currentView.getLayoutX();
     }
 
     @Override
     public int getYLocation() {
-        // TODO Auto-generated method stub
-        return 0;
+        return (int) currentView.getLayoutY();
+
     }
 
     @Override
@@ -44,37 +48,44 @@ public abstract class Fruit implements GameObject {
 
     @Override
     public int getInitialVelocity() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Math.abs((int) eq.getInitialSpeed());
     }
 
     @Override
     public int getFallingVelocity() {
-        // TODO Auto-generated method stub
-        return 0;
+        return Math.abs((int) eq.getInitialSpeed());
+
     }
 
     @Override
     public boolean isSliced() {
-        // TODO Auto-generated method stub
         return isSliced;
     }
 
     @Override
     public boolean hasMovedOffScreen() {
-        // TODO Auto-generated method stub
-        return false;
+        int[] arr = eq.getScreenSize();
+        return getImageView().getLayoutX() > arr[1] || getImageView().getLayoutY() > arr[0];
     }
 
     @Override
     public void slice() {
         isSliced = true;
-        System.out.println("isSliced equals " + isSliced);
     }
 
+    /**
+     * @param time current time NOT delta time
+     *             the starting time is then deducted from this time to get delta time
+     *             that is passed to updateCoordinates
+     */
     @Override
     public void move(double time) {
-
+        Point p = eq.updateCoordinates((int) (getImageView().getLayoutX()), (int) (getImageView().getLayoutY()),
+                time - startingTime);
+        nextSlicedFrame();
+        getImageView().setRotate(getImageView().getRotate() + 1);
+        getImageView().setLayoutX(p.x);
+        getImageView().setLayoutY(p.y);
     }
 
     @Override
@@ -83,32 +94,35 @@ public abstract class Fruit implements GameObject {
         bufferedImages[0] = image;
         bufferedImages[1] = image_left;
         bufferedImages[2] = image_right;
-
         return bufferedImages;
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
-
     public void nextSlicedFrame() {
-        okToRotate = (timesRotated * rotationAngle) <= (Math.PI / 10);
-        if (this.isSliced() && this.okToRotate) {
+        //change this to control rotation speed
+        double rotationAngle = Math.PI / 200;
+        boolean okToRotate = (timesRotated * rotationAngle) <= (Math.PI / 10);
+        if (this.isSliced() && okToRotate) {
             timesRotated++;
             image_left = MiscUtils.rotateLeft(image_left, rotationAngle);
             image_right = MiscUtils.rotateRight(image_right, rotationAngle);
             image = MiscUtils.concat(image_left, image_right, timesRotated);
             currentView.setImage(SwingFXUtils.toFXImage(image, null));
         }
+        if (isSliced) {
+            double x = getImageView().getScaleX() - 0.005;
+            double y = getImageView().getScaleY() - 0.005;
+            getImageView().setScaleX(x > 0.5 ? x : getImageView().getScaleX());
+            getImageView().setScaleY(y > 0.5 ? y : getImageView().getScaleY());
+        }
     }
 
     public ImageView getImageView() {
-
         return currentView;
     }
 
-
-
+    public void setEq(Equation eq) {
+        this.eq = eq;
+    }
 
 
 }
