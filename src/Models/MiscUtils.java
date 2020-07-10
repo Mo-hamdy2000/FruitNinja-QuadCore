@@ -41,7 +41,7 @@ public class MiscUtils {
     public static BufferedImage concat(BufferedImage img1, BufferedImage img2, int x) {
 
         //do some calculate first
-        int offset = -4 * x;
+        int offset = -3 * x;
         int wid = img1.getWidth() + img2.getWidth() + offset;
         int height = Math.max(img1.getHeight(), img2.getHeight()) + offset;
         //create a new buffer and draw two image into the new image

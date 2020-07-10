@@ -19,8 +19,11 @@ public class TestSlicing extends Application {
     AnimationTimer timer;
     Pane root = new Pane();
 
-    Watermelon watermelon = new Watermelon();
-    FruitDecorator f=new FruitDecorator(watermelon);
+    FruitFactory fruitFactory = new FruitFactory();
+    Fruit watermelon = fruitFactory.createObject(GameObjects.Watermelon);
+    Fruit apple = fruitFactory.createObject(GameObjects.Apple);
+    Fruit banana = fruitFactory.createObject(GameObjects.Banana);
+    //FruitDecorator f = new FruitDecorator(watermelon);
     List<Fruit> fruits = new ArrayList<Fruit>();
 
     double mouseX;
