@@ -15,7 +15,7 @@ public abstract class Fruit implements GameObject {
     private boolean isSliced = false;
     protected GameObjects objectType;
     private Equation eq;
-    protected int score;
+    protected int score = 1;
     private final double startingTime;
 
     public Fruit() {
@@ -71,6 +71,7 @@ public abstract class Fruit implements GameObject {
     @Override
     public void slice() {
         isSliced = true;
+        GameLogic.getInstance().getGameProperties().incrementScore(score);
     }
 
     /**

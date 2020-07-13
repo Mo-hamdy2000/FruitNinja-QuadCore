@@ -16,17 +16,21 @@ import java.util.ArrayList;
 public class GameLogic implements GameActions {
 
 	private static GameLogic instance;
-	private static GameProperties gameProperties;
+	private GameProperties gameProperties;
 	private ArrayList<GameObject> objectsList;
-	
+
 	// This member will be used by the controller to  determine file to save in it or load from it --MO2--
 	private String targetFileName;
-	
+
+	public GameProperties getGameProperties() {
+		return gameProperties;
+	}
+
 	private GameLogic() {
 		if (instance != null)
 			throw new RuntimeException("use getInstance method");
 		objectsList = new ArrayList<GameObject>();
-		
+
 		objectsList.add(new Apple());
 		objectsList.add(new Watermelon());
 	}
@@ -36,7 +40,7 @@ public class GameLogic implements GameActions {
 			synchronized (GameLogic.class) {
 				if (instance == null) {
 					instance = new GameLogic();
-					gameProperties = new GameProperties();
+					instance.gameProperties = new GameProperties();
 
 				}
 
