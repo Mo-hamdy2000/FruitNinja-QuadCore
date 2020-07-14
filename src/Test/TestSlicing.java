@@ -21,8 +21,10 @@ public class TestSlicing extends Application {
 
     FruitFactory fruitFactory = new FruitFactory();
     Fruit watermelon = fruitFactory.createObject(GameObjects.Watermelon);
+    Fruit pineapple = fruitFactory.createObject(GameObjects.Pineapple);
     Fruit apple = fruitFactory.createObject(GameObjects.Apple);
     Fruit banana = fruitFactory.createObject(GameObjects.Banana);
+    Fruit orange = fruitFactory.createObject(GameObjects.Orange);
     //FruitDecorator f = new FruitDecorator(watermelon);
     List<Fruit> fruits = new ArrayList<Fruit>();
 
@@ -40,8 +42,8 @@ public class TestSlicing extends Application {
 
         EasyEquationGenerator eg = new EasyEquationGenerator(1000, 500);
         Equation eq = eg.generateEquation();
-        watermelon.setEq(eq);
-        fruits.add(watermelon);
+        orange.setEq(eq);
+        fruits.add(orange);
 
         speed = 1;
         falling = 500;
