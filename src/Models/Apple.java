@@ -25,9 +25,6 @@ public class Apple extends Fruit {
         }
     }
 
-    @Override
-    public void makeSpecial() {
-
-    }
+    
 
 }
