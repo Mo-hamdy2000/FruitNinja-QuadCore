@@ -63,7 +63,8 @@ public class MiscUtils {
     	EventHandler<javafx.scene.input.MouseEvent> eventHandler=new EventHandler<javafx.scene.input.MouseEvent>() { 
             @Override 
             public void handle(javafx.scene.input.MouseEvent e) { 
-               gameObject.slice();           
+               gameObject.slice();   
+               System.out.println(gameObject.isSliced());
             } 
          };   
 		return eventHandler;
