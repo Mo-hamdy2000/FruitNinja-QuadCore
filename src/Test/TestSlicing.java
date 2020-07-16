@@ -1,6 +1,7 @@
 package Test;
 
 import Models.*;
+import Models.Interfaces.GameObject;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,6 +19,7 @@ public class TestSlicing extends Application {
 
     AnimationTimer timer;
     Pane root = new Pane();
+    GameLogic game=GameLogic.getInstance();
 
     FruitFactory fruitFactory = new FruitFactory();
     Fruit watermelon = fruitFactory.createObject(GameObjects.Watermelon);
@@ -25,8 +27,12 @@ public class TestSlicing extends Application {
     Fruit apple = fruitFactory.createObject(GameObjects.Apple);
     Fruit banana = fruitFactory.createObject(GameObjects.Banana);
     Fruit orange = fruitFactory.createObject(GameObjects.Orange);
-    //FruitDecorator f = new FruitDecorator(watermelon);
-    List<Fruit> fruits = new ArrayList<Fruit>();
+   
+    /* 
+     * replace it with any other decorator to test different functionalities
+     *                                                                       */
+     Fruit w= new SliceAllDecorator(pineapple);
+     
 
     double mouseX;
     double speed;
@@ -42,13 +48,15 @@ public class TestSlicing extends Application {
 
         EasyEquationGenerator eg = new EasyEquationGenerator(1000, 500);
         Equation eq = eg.generateEquation();
-        orange.setEq(eq);
-        fruits.add(orange);
+        pineapple.setEq(eq);
+        game.getGameObjects().add(pineapple);
+        game.getGameObjects().add(apple);
+        game.getGameObjects().add(orange);
 
         speed = 1;
         falling = 500;
 
-        root.getChildren().add(fruits.get(0).getImageView());
+        root.getChildren().add(((Fruit)game.getGameObjects().get(0)).getImageView());
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
 
@@ -91,7 +99,7 @@ public class TestSlicing extends Application {
 
     public void gameUpdate(Equation eq) {
 
-        Fruit w = fruits.get(0);
+        Fruit w = (Fruit) game.getGameObjects().get(0);
         w.move(System.currentTimeMillis());
 
     }
