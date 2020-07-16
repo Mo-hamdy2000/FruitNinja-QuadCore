@@ -17,7 +17,8 @@ public class GameLogic implements GameActions {
 
 	private static GameLogic instance;
 	private GameProperties gameProperties;
-	private ArrayList<GameObject> objectsList;
+	protected ArrayList<GameObject> objectsList;
+	protected static float speedFactor=1;
 
 	// This member will be used by the controller to  determine file to save in it or load from it --MO2--
 	private String targetFileName;
@@ -26,13 +27,12 @@ public class GameLogic implements GameActions {
 		return gameProperties;
 	}
 
-	private GameLogic() {
+	public GameLogic() {
 		if (instance != null)
 			throw new RuntimeException("use getInstance method");
 		objectsList = new ArrayList<GameObject>();
 
-		objectsList.add(new Apple());
-		objectsList.add(new Watermelon());
+		
 	}
 
 	public static GameLogic getInstance() {
@@ -47,6 +47,11 @@ public class GameLogic implements GameActions {
 			}
 		}
 		return instance;
+	}
+	
+	public ArrayList<GameObject> getGameObjects()
+	{
+		return objectsList;
 	}
 
 
