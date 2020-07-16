@@ -17,12 +17,13 @@ public abstract class Fruit implements GameObject {
     private Equation eq;
     protected int score = 1;
     private final double startingTime;
+   
 
     public Fruit() {
         startingTime = System.currentTimeMillis();
     }
 
-    public abstract void makeSpecial();
+   
 
     @Override
     public GameObjects getObjectType() {
@@ -70,8 +71,10 @@ public abstract class Fruit implements GameObject {
 
     @Override
     public void slice() {
+    	System.out.println("Fruit is sliced");
         isSliced = true;
         GameLogic.getInstance().getGameProperties().incrementScore(score);
+       
     }
 
     /**
