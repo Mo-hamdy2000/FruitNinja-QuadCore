@@ -13,10 +13,10 @@ public class HardEquationGenerator implements EquationGenerator {
 	
 	@Override
 	public Equation generateEquation() {
-        int initialSpeed = (int) MiscUtils.rand(150, 300);
+        int initialSpeed = (int) MiscUtils.rand(186, 300);
         int startPoint = (int) MiscUtils.rand(0, screenWidth / 2);
-        double maxAngle = Math.asin(Math.sqrt((2 * 9.8 * screenHeight) / initialSpeed * initialSpeed));
-        double projectionAngle = MiscUtils.rand(Math.PI / 12, maxAngle);
+        double maxAngle = Math.asin(Math.sqrt((2 * Equation.gravityFactor * screenHeight) / initialSpeed * initialSpeed));
+        double projectionAngle = MiscUtils.rand(Math.PI / 6, maxAngle);
         Equation equation = new Equation(this.screenHeight, this.screenWidth, initialSpeed, projectionAngle, startPoint);
         return equation;
     }

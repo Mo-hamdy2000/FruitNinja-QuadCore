@@ -80,7 +80,7 @@ public class TestSlicing extends Application {
 
         timer.start();
 
-        Scene scene = new Scene(root, 1000, 500);
+        Scene scene = new Scene(root, 1200, 800);
 
         scene.setOnMouseMoved(e -> {
             mouseX = e.getX();
