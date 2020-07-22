@@ -6,7 +6,7 @@ public class testSaving {
 
 	public static void main(String[] args) {
 
-		GameLogic game = GameLogic.getInstance();
+		GameLogic game = new GameLogic();
 		game.loadGame();
 	}
 

@@ -2,7 +2,6 @@ package Models;
 
 import Models.Interfaces.GameActions;
 import org.w3c.dom.*;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -13,9 +12,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class GameLogic implements GameActions {
+	
 
-	private static GameLogic instance;
-	private GameProperties gameProperties;
+	private GameProperties gameProperties= new GameProperties();
 	protected ArrayList<GameObject> objectsList;
 	protected static float speedFactor=1;
 
@@ -26,28 +25,6 @@ public class GameLogic implements GameActions {
 		return gameProperties;
 	}
 
-	public GameLogic() {
-		if (instance != null)
-			throw new RuntimeException("use getInstance method");
-		objectsList = new ArrayList<GameObject>();
-
-		
-	}
-
-	public static GameLogic getInstance() {
-		if (instance == null) {
-			synchronized (GameLogic.class) {
-				if (instance == null) {
-					instance = new GameLogic();
-					instance.gameProperties = new GameProperties();
-
-				}
-
-			}
-		}
-		return instance;
-	}
-	
 	public ArrayList<GameObject> getGameObjects()
 	{
 		return objectsList;
@@ -75,11 +52,21 @@ public class GameLogic implements GameActions {
 
 	@Override
 	public void updateObjectsLocation() {
-
+		
+		ArrayList<GameObject> list=Game.getInstance().getList();
+		for(GameObject object:list)
+			object.move(System.currentTimeMillis());
+		
 	}
 
 	@Override
 	public void sliceObjects() {
+		
+		ArrayList<GameObject> list = Game.getInstance().getList();
+		for (GameObject object : list) {
+			if (!(object.getClass().equals(Bomb.class) || object.isSliced()))
+				object.slice();
+		}
 
 	}
 

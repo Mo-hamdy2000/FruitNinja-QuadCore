@@ -69,8 +69,9 @@ public class ScoreDecorator extends FruitDecorator implements GameObject  {
 	@Override
 	public void slice() {
 		specialFruit.slice();
-		GameLogic.getInstance().getGameProperties().incrementScore(specialFruit.score);
-		System.out.println(GameLogic.getInstance().getGameProperties().getScore());
+        GameLogic gameLogic=new GameLogic();
+		gameLogic.getGameProperties().incrementScore(specialFruit.score);
+		System.out.println(gameLogic.getGameProperties().getScore());
 		
 		
 	}
