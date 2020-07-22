@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GameLogic implements GameActions {
 	
 
-	private GameProperties gameProperties;
+	private GameProperties gameProperties= new GameProperties();
 	protected ArrayList<GameObject> objectsList;
 	protected static float speedFactor=1;
 
