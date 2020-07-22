@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class GameLogic implements GameActions {
 	
-	private Game currentGame=Game.getInstance();
+
 	private GameProperties gameProperties;
 	protected ArrayList<GameObject> objectsList;
 	protected static float speedFactor=1;
@@ -53,7 +53,7 @@ public class GameLogic implements GameActions {
 	@Override
 	public void updateObjectsLocation() {
 		
-		ArrayList<GameObject> list=currentGame.getList();
+		ArrayList<GameObject> list=Game.getInstance().getList();
 		for(GameObject object:list)
 			object.move(System.currentTimeMillis());
 		
@@ -62,7 +62,7 @@ public class GameLogic implements GameActions {
 	@Override
 	public void sliceObjects() {
 		
-		ArrayList<GameObject> list = currentGame.getList();
+		ArrayList<GameObject> list = Game.getInstance().getList();
 		for (GameObject object : list) {
 			if (!(object.getClass().equals(Bomb.class) || object.isSliced()))
 				object.slice();
