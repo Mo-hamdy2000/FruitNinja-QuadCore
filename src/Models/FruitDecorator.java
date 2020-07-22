@@ -44,7 +44,8 @@ public class FruitDecorator extends Fruit {
 				this.specialFruit.image= ImageIO.read(new File("src/resources/fruits/apple_special.png"));
 				     specialFruit.image_left=ImageIO.read(new File("src/resources/fruits/apple_special_left.png"));
 				     specialFruit.image_right=ImageIO.read(new File("src/resources/fruits/apple_special_right.png"));
-				     specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     //specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     specialFruit.currentView.setImage(SwingFXUtils.toFXImage(specialFruit.image, null));
 		             specialFruit.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
 		           
 			} catch (IOException e) {
@@ -56,7 +57,8 @@ public class FruitDecorator extends Fruit {
 				this.specialFruit.image= ImageIO.read(new File("src/resources/fruits/banana_special_sliceAll.png"));
 				     specialFruit.image_left=ImageIO.read(new File("src/resources/fruits/banana_left.png"));
 				     specialFruit.image_right=ImageIO.read(new File("src/resources/fruits/banana_right.png"));
-				     specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     //specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     specialFruit.currentView.setImage(SwingFXUtils.toFXImage(specialFruit.image, null));
 		             specialFruit.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
 		           
 			} catch (IOException e) {
@@ -72,7 +74,8 @@ public class FruitDecorator extends Fruit {
 				this.specialFruit.image= ImageIO.read(new File("src/resources/fruits/orange_special.png"));
 				     specialFruit.image_left=ImageIO.read(new File("src/resources/fruits/orange_special_left.png"));
 				     specialFruit.image_right=ImageIO.read(new File("src/resources/fruits/orange_special_right.png"));
-				     specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     //specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     specialFruit.currentView.setImage(SwingFXUtils.toFXImage(specialFruit.image, null));
 		             specialFruit.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
 		           
 			} catch (IOException e) {
@@ -84,7 +87,8 @@ public class FruitDecorator extends Fruit {
 				this.specialFruit.image= ImageIO.read(new File("src/resources/fruits/pineapple_special.png"));
 				     specialFruit.image_left=ImageIO.read(new File("src/resources/fruits/pineapple_left.png"));
 				     specialFruit.image_right=ImageIO.read(new File("src/resources/fruits/pineapple_right.png"));
-				     specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     //specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+				     specialFruit.currentView.setImage(SwingFXUtils.toFXImage(specialFruit.image, null));
 		             specialFruit.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
 		           
 			} catch (IOException e) {
