@@ -52,6 +52,26 @@ public class Game {
 		timeline.setCycleCount(1000);
 		timeline.play();
 
+		Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+
+			GameObject object = list.get(list.size() - 1);
+			if (object instanceof Fruit) {
+
+				Fruit f = new FruitDecorator(object);
+				Fruit l = new ScoreDecorator(f);
+				Fruit m = new SliceAllDecorator(f);
+				Fruit n = new SlowDownDecorator(f);
+				Fruit[] arr = { l, m, n };
+				int index = (int) MiscUtils.rand(0, 2);
+				list.add(arr[index]);
+				root.getChildren().add(((GameObject) list.get(list.size() - 1)).getImageView());
+
+			}
+
+		}));
+		timeline2.setCycleCount(1000);
+		timeline2.play();
+
 		timer = new AnimationTimer() {
 
 			@Override
@@ -64,40 +84,6 @@ public class Game {
 		};
 
 		timer.start();
-		
-		Timeline timeline2 =new Timeline(new KeyFrame(Duration.seconds(10), event -> {
-			
-			GameObject object=list.get(list.size()-1);
-			if(object instanceof Fruit) {
-				
-				Fruit f=new FruitDecorator(object);
-				Fruit l=new ScoreDecorator(f);
-				Fruit m=new SliceAllDecorator(f);
-				Fruit n=new SlowDownDecorator(f);
-			    Fruit []arr= {l,m,n};
-			    int index=(int) MiscUtils.rand(0,2);
-			    list.add(arr[index]);
-				root.getChildren().add(((GameObject) list.get(list.size() - 1)).getImageView());
-
-			}
-			
-			
-		}));
-		timeline2.setCycleCount(1000);
-		timeline2.play();
-		
-		AnimationTimer timer2 = new AnimationTimer() {
-
-			@Override
-			public void handle(long arg0) {
-
-				gameUpdate(list);
-
-			}
-
-		};
-		timer2.start();
-
 
 	}
 
