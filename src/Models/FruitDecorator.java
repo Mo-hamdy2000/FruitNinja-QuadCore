@@ -1,6 +1,5 @@
 package Models;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -17,6 +16,7 @@ public class FruitDecorator extends Fruit {
 	public FruitDecorator(GameObject specialFruit)
 	{ 
 		this.specialFruit=(Fruit) specialFruit;
+		this.setEq(this.specialFruit.eq);
 		makeSpecial();
 		
 		
@@ -31,7 +31,8 @@ public class FruitDecorator extends Fruit {
 			this.specialFruit.image= ImageIO.read(new File("src/resources/fruits/specialWatermelon.png"));
 			     specialFruit.image_left=ImageIO.read(new File("src/resources/fruits/specialWatermelon_left.png"));
 			     specialFruit.image_right=ImageIO.read(new File("src/resources/fruits/specialWatermelon_right.png"));
-			     specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+			     //specialFruit.currentView = new ImageView(SwingFXUtils.toFXImage(specialFruit.image, null));
+			     specialFruit.currentView.setImage(SwingFXUtils.toFXImage(specialFruit.image, null));
 	             specialFruit.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
 	           
 		} catch (IOException e) {
@@ -92,10 +93,11 @@ public class FruitDecorator extends Fruit {
 			
 			break;
 		   default:
-			
-		
 	}
 	}
-
+	
+	public ImageView getImageView() {
+        return this.specialFruit.getImageView();
+    }
 
 }

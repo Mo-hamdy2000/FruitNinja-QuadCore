@@ -12,7 +12,7 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
     private int timesRotated = 0;
     protected boolean isSliced = false;
     protected GameObjects objectType;
-    private Equation eq;
+    protected Equation eq;
     private final double startingTime;
    
 
@@ -76,6 +76,7 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
      */
     @Override
     public void move(double time) {
+    	System.out.println(getImageView().getLayoutX());
         Point p = eq.updateCoordinates((int) (getImageView().getLayoutX()), (int) (getImageView().getLayoutY()),
                 time - startingTime);
         nextSlicedFrame();

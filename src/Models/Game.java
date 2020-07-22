@@ -41,6 +41,10 @@ public class Game {
  
 		EasyEquationGenerator eg = new EasyEquationGenerator(1200, 800);
 		DangerousBomb b = new DangerousBomb();
+		Watermelon w = new Watermelon();
+		w.setEq(eg.generateEquation());
+		FruitDecorator fd = new FruitDecorator(w);
+		list.add(fd);
 		b.setEq(eg.generateEquation());
 		list.add(b);
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), event -> {
