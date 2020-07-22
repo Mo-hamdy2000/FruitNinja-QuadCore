@@ -1,10 +1,9 @@
 package Models;
 
-import Models.Interfaces.GameObject;
 
-public class BombFactory extends GameObjectfactory<Bombs>{
+public class BombFactory extends GameObjectfactory {
 	@Override
-	public GameObject createObject(Bombs bomb) {
+	public GameObject createObject(GameObjects bomb) {
 		
 		switch (bomb) {
 		case DangerousBomb:
