@@ -1,6 +1,5 @@
 package Models;
 
-import Models.Interfaces.GameObject;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 

@@ -1,6 +1,5 @@
 package Models;
 
-import Models.Interfaces.GameObject;
 
 public class BombFactory extends GameObjectfactory {
 	@Override

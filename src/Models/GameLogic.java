@@ -1,7 +1,6 @@
 package Models;
 
 import Models.Interfaces.GameActions;
-import Models.Interfaces.GameObject;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;

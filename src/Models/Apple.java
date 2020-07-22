@@ -16,9 +16,7 @@ public class Apple extends Fruit {
             this.image_left = ImageIO.read(new File("src/resources/fruits/apple_left.png"));
             this.image_right = ImageIO.read(new File("src/resources/fruits/apple_right.png"));
             this.currentView = new ImageView(SwingFXUtils.toFXImage(this.image, null));
-            this.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
-            System.out.println(this);
-
+            this.currentView.setOnMouseClicked(MiscUtils.assignListener(this));
 
         } catch (IOException e) {
             MiscUtils.fileNotFound();

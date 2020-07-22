@@ -3,9 +3,7 @@ package Models;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import Models.Interfaces.GameObject;
-
-public class SliceAllDecorator extends FruitDecorator implements GameObject {
+public class SliceAllDecorator extends FruitDecorator {
 
 	public SliceAllDecorator(GameObject specialFruit) {
 		super(specialFruit);
@@ -64,7 +62,7 @@ public class SliceAllDecorator extends FruitDecorator implements GameObject {
 	public void slice() {
 		specialFruit.slice();
 		//System.out.println("custom slice");
-		ArrayList<GameObject> fruits =GameLogic.getInstance().objectsList;
+		ArrayList<GameObject> fruits = Game.getInstance().getList();
 		System.out.println(fruits);
 		for(GameObject gameObject: fruits)
 		{   
