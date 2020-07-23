@@ -19,13 +19,20 @@ public class Equation {
 		this.startPoint = startPoint;
 	}
 
-	public Point updateCoordinates(int x, int y, double deltaTime) {
+	public Point updateCoordinates(int x, int y, double deltaTime, boolean isSliced) {
 		Point point = new Point();
-		deltaTime = (deltaTime * GameLogic.speedFactor);
-		point.x = (int) (initialSpeed * deltaTime * Math.cos(projectionAngle) / 1000 + startPoint);
-		point.y = (int) (initialSpeed * deltaTime * Math.sin(projectionAngle) / 1000
-				- 0.5 * gravityFactor * deltaTime * deltaTime / 1000000);
-		point.y = this.screenHeight - point.y;
+		if (isSliced) {
+			deltaTime = (deltaTime * GameLogic.speedFactor);
+			point.x = (int) (initialSpeed * deltaTime * Math.cos(projectionAngle) / 1000 + startPoint);
+			point.y = (int) (gravityFactor*0.5 + y);
+		}
+		else {
+			deltaTime = (deltaTime * GameLogic.speedFactor);
+			point.x = (int) (initialSpeed * deltaTime * Math.cos(projectionAngle) / 1000 + startPoint);
+			point.y = (int) (initialSpeed * deltaTime * Math.sin(projectionAngle) / 1000
+					- 0.5 * gravityFactor * deltaTime * deltaTime / 1000000);
+			point.y = this.screenHeight - point.y;
+		}
 		return point;
 	}
 
@@ -37,4 +44,9 @@ public class Equation {
 		int[] arr = {screenHeight, screenWidth};
 		return arr;
 	}
+	
+	public int getMaxHeight() {
+		return (int) (Math.pow(initialSpeed * Math.sin(projectionAngle), 2) / (2 * gravityFactor));
+	}
+	
 }
