@@ -1,4 +1,5 @@
 package Models;
+
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -19,6 +20,7 @@ public class Game {
 		if (instance != null)
 			throw new RuntimeException("use getInstance method");
 	}
+
 	public static Game getInstance() {
 		if (instance == null) {
 			synchronized (GameLogic.class) {
@@ -34,6 +36,7 @@ public class Game {
 	private int score = 0;
 	private int lives = 3;
 	private ArrayList<GameObject> list = new ArrayList<GameObject>();
+	private boolean pause=false;
 
 	public void start(Pane root) {
 
@@ -52,7 +55,9 @@ public class Game {
 
 		Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
 
-			GameObject object = list.get(list.size() - 1);
+			GameObject object = gameLogic.createGameObject();
+			((GameObject) object).setEq(eg.generateEquation());
+
 			if (object instanceof Fruit) {
 
 				Fruit l = new ScoreDecorator(object);
@@ -61,7 +66,7 @@ public class Game {
 				Fruit[] arr = { l, m, n };
 				int index = (int) MiscUtils.rand(0, 2);
 				list.add(arr[index]);
-				root.getChildren().add(((GameObject) list.get(list.size() - 1)).getImageView());
+				root.getChildren().add(((Fruit) list.get(list.size() - 1)).getImageView());
 
 			}
 
@@ -75,11 +80,14 @@ public class Game {
 			public void handle(long arg0) {
 
 				gameUpdate(list);
-
+				if(pause) {
+					timer.stop();
+					timeline.stop();
+					timeline2.stop();
+				}
 			}
-
 		};
-
+		
 		timer.start();
 
 	}
@@ -112,6 +120,14 @@ public class Game {
 
 	public ArrayList<GameObject> getList() {
 		return list;
+	}
+	
+	public void setPause(boolean pause) {
+		this.pause = pause;
+	}
+
+	public boolean getPause() {
+		return pause;
 	}
 
 }
