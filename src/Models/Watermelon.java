@@ -11,11 +11,10 @@ public class Watermelon extends Fruit {
 	
 	public Watermelon() {
         this.objectType = GameObjects.Watermelon;
-        // Commented the part below just for testing --MO2--
         try {
-            this.image = ImageIO.read(new File("src/resources/fruits/watermelon.png"));
-            this.image_left = ImageIO.read(new File("src/resources/fruits/watermelon_left.png"));
-            this.image_right = ImageIO.read(new File("src/resources/fruits/watermelon_right.png"));
+            this.image = ImageIO.read(new File("src/resources/fruits/Watermelon.png"));
+            this.image_left = ImageIO.read(new File("src/resources/fruits/Watermelon_left.png"));
+            this.image_right = ImageIO.read(new File("src/resources/fruits/Watermelon_right.png"));
             this.currentView = new ImageView(SwingFXUtils.toFXImage(this.image, null));
             this.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
             System.out.println(this);

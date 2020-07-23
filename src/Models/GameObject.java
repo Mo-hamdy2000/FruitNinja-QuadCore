@@ -40,8 +40,7 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
 
     @Override
     public int getMaxHeight() {
-        // TODO Auto-generated method stub
-        return 0;
+        return eq.getMaxHeight();
     }
 
     @Override
@@ -76,9 +75,8 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
      */
     @Override
     public void move(double time) {
-    	System.out.println(getImageView().getLayoutX());
         Point p = eq.updateCoordinates((int) (getImageView().getLayoutX()), (int) (getImageView().getLayoutY()),
-                time - startingTime);
+                time - startingTime, this.isSliced());
         nextSlicedFrame();
         getImageView().setRotate(getImageView().getRotate() + 1);
         getImageView().setLayoutX(p.x);

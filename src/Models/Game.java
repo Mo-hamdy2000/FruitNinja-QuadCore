@@ -30,7 +30,7 @@ public class Game {
 		return instance;
 	}
 
-	private GameLogic gameLogic = new GameLogic();
+	protected GameLogic gameLogic = new GameLogic();
 	private int score = 0;
 	private int lives = 3;
 	private ArrayList<GameObject> list = new ArrayList<GameObject>();
@@ -55,10 +55,9 @@ public class Game {
 			GameObject object = list.get(list.size() - 1);
 			if (object instanceof Fruit) {
 
-				Fruit f = new FruitDecorator(object);
-				Fruit l = new ScoreDecorator(f);
-				Fruit m = new SliceAllDecorator(f);
-				Fruit n = new SlowDownDecorator(f);
+				Fruit l = new ScoreDecorator(object);
+				Fruit m = new SliceAllDecorator(object);
+				Fruit n = new SlowDownDecorator(object);
 				Fruit[] arr = { l, m, n };
 				int index = (int) MiscUtils.rand(0, 2);
 				list.add(arr[index]);
