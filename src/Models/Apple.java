@@ -22,7 +22,4 @@ public class Apple extends Fruit {
             MiscUtils.fileNotFound();
         }
     }
-
-    
-
 }

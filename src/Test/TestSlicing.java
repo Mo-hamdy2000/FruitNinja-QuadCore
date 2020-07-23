@@ -19,7 +19,7 @@ public class TestSlicing extends Application {
 
     AnimationTimer timer;
     Pane root = new Pane();
-    GameLogic game=GameLogic.getInstance();
+    GameLogic game=new GameLogic();
 
     FruitFactory fruitFactory = new FruitFactory();
     Fruit watermelon = fruitFactory.createObject(GameObjects.Watermelon);

@@ -1,5 +1,6 @@
 package Models;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import Models.Interfaces.GameObject;
@@ -87,7 +88,6 @@ public class SlowDownDecorator extends FruitDecorator implements GameObject {
 
 	@Override
 	public void move(double time) {
-	
 		
 	}
 

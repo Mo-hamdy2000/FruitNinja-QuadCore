@@ -2,6 +2,7 @@ package Test;
 
 import Models.EasyEquationGenerator;
 import Models.Equation;
+import Models.Game;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -38,8 +39,8 @@ public class Game1 extends Application {
  
     @Override
     public void start(Stage primaryStage) throws Exception {
-       
-        lblMissed = new Label("Missed: 0");
+
+        /*lblMissed = new Label("Missed: 0");
         lblMissed.setLayoutX(10);
         lblMissed.setLayoutY(10);
         missed = 0;
@@ -81,14 +82,18 @@ public class Game1 extends Application {
        
         scene.setOnMouseMoved(e -> {
             mouseX = e.getX();
-        });
-       
+        });*/
+    	
+        /*Pane root = new Pane();
+        Scene scene = new Scene(root, 1000, 500);
+        Game game=Game.getInstance();
+        game.start(root);
         primaryStage.setScene(scene);
         primaryStage.show();
        
-    }
+    
    
-    public Circle circle() {
+    /*public Circle circle() {
         Circle circle = new Circle();
         circle.setLayoutX(0);
         circle.setLayoutY(0);
@@ -129,8 +134,11 @@ public class Game1 extends Application {
             //System.out.println(p.x);
             //System.out.println(p.y);
             //System.out.println(p.y);
-            //c.setLayoutY(p.y);
-            /*//if get droped into square
+            //
+        	//c.setLayoutY(p.y);
+            //if get droped into square
+            for(int i = 0; i < drop.size(); i++) {
+            	
             if((((Circle) drop.get(i)).getLayoutX() > cont.getLayoutX() && ((Circle) drop.get(i)).getLayoutX() < cont.getLayoutX() + 70) &&
                     ((Circle) drop.get(i)).getLayoutY() >= 550  ) {
                 root.getChildren().remove(((Circle) drop.get(i)));
@@ -143,7 +151,7 @@ public class Game1 extends Application {
                 drop.remove(i);
                 missed += 1;
                 lblMissed.setText("Missed: " + String.valueOf(missed));
-            }*/
+            }
+    }*/
     }
- 
 }

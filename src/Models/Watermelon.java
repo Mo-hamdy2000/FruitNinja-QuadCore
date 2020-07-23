@@ -25,6 +25,5 @@ public class Watermelon extends Fruit {
             MiscUtils.fileNotFound();
         }
     }
-
 	
 }
