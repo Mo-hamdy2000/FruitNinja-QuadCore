@@ -13,6 +13,7 @@ public class Game {
 	double speed;
 	double falling;
 	AnimationTimer timer;
+	Timeline timeline,timeline2;
 
 	private static Game instance;
 
@@ -42,7 +43,7 @@ public class Game {
 
 		EasyEquationGenerator eg = new EasyEquationGenerator(1200, 800);
 
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), event -> {
+		timeline = new Timeline(new KeyFrame(Duration.millis(1500), event -> {
 
 			GameObject object = gameLogic.createGameObject();
 			((GameObject) object).setEq(eg.generateEquation());
@@ -53,7 +54,7 @@ public class Game {
 		timeline.setCycleCount(1000);
 		timeline.play();
 
-		Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+		timeline2 = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
 
 			GameObject object = gameLogic.createGameObject();
 			((GameObject) object).setEq(eg.generateEquation());
@@ -82,20 +83,28 @@ public class Game {
 				gameUpdate(list);
 				if(pause) {
 					timer.stop();
-					timeline.stop();
-					timeline2.stop();
+					timeline.pause();
+					timeline2.pause();
 				}
+
+				
 			}
 		};
 		
 		timer.start();
-
+		
 	}
 
 	public void gameUpdate(ArrayList<GameObject> list) {
 		for (GameObject object : list) {
 			object.move(System.currentTimeMillis());
 		}
+	}
+	
+	public void resume() {
+		timeline.play();
+		timeline2.play();
+		timer.start();
 	}
 
 	public void setLives(int lives) {
