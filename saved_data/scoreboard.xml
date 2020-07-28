@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.2" class="java.beans.XMLDecoder">
+ <object class="Models.ScoreBoard" id="ScoreBoard0">
+  <void property="scoreBoard">
+   <void method="add">
+    <object class="Models.Player">
+     <void property="name">
+      <string>momen</string>
+     </void>
+     <void property="score">
+      <int>300</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="Models.Player">
+     <void property="name">
+      <string>mariam</string>
+     </void>
+     <void property="score">
+      <int>106</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="Models.Player">
+     <void property="name">
+      <string>ahmad</string>
+     </void>
+     <void property="score">
+      <int>76</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="Models.Player">
+     <void property="name">
+      <string>asmaa</string>
+     </void>
+     <void property="score">
+      <int>69</int>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>
