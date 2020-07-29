@@ -44,12 +44,9 @@ public class MiscUtils {
         int wid = img1.getWidth() + img2.getWidth() + offset;
         int height = Math.max(img1.getHeight(), img2.getHeight()) + offset;
         //create a new buffer and draw two image into the new image
-        BufferedImage newImage = new BufferedImage(wid, height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage newImage = new BufferedImage(wid, height, BufferedImage.TYPE_INT_ARGB); 
         Graphics2D g2 = newImage.createGraphics();
         Color oldColor = g2.getColor();
-        //fill background
-        g2.setPaint(Color.WHITE);
-        g2.fillRect(0, 0, wid, height);
         //draw image
         g2.setColor(oldColor);
         g2.drawImage(img1, null, 0, 0);
@@ -63,7 +60,6 @@ public class MiscUtils {
             @Override 
             public void handle(javafx.scene.input.MouseEvent e) { 
                gameObject.slice();   
-               System.out.println(gameObject.isSliced());
             } 
          };   
 		return eventHandler;

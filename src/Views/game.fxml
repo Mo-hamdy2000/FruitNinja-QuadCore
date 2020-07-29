@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="832.0" prefWidth="1200.0" styleClass="game" stylesheets="@../resources/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
+   <children>
+      <Label fx:id="scoreTextLbl" layoutX="566.0" prefHeight="21.0" prefWidth="68.0" text="Score" textFill="WHITE">
+         <font>
+            <Font name="Viner Hand ITC" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="scoreLbl" layoutX="566.0" layoutY="51.0" prefHeight="52.0" prefWidth="68.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Viner Hand ITC" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="livesTextLbl" layoutX="988.0" prefHeight="51.0" prefWidth="212.0" text="Remaining Lives" textFill="WHITE">
+         <font>
+            <Font name="Viner Hand ITC" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="livesLbl" layoutX="1060.0" layoutY="51.0" prefHeight="52.0" prefWidth="68.0" text="3" textFill="WHITE">
+         <font>
+            <Font name="Urdu Typesetting" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="quitImageView" fitHeight="54.0" fitWidth="128.0" layoutY="5.0" onMouseClicked="#quitMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/quit.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timeTextLbl" layoutX="874.0" layoutY="7.0" prefHeight="51.0" prefWidth="212.0" text="Remaining Time:" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Viner Hand ITC" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="timeLbl" layoutX="1118.0" layoutY="14.0" prefHeight="52.0" prefWidth="68.0" text="60" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Urdu Typesetting" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

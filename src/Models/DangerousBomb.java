@@ -13,13 +13,9 @@ public class DangerousBomb extends Bomb{
 	public DangerousBomb() {
 		this.objectType = GameObjects.DangerousBomb;
         try {
-            this.image = ImageIO.read(new File("src/resources/bombs/Dangerous_Bomb.png"));
-            this.image_left = ImageIO.read(new File("src/resources/bombs/bomb_cut_left.png"));
-            this.image_right = ImageIO.read(new File("src/resources/bombs/bomb_cut_left.png"));
+            this.image = ImageIO.read(new File("src/resources/bombs/dangerous_bomb.png"));
             this.currentView = new ImageView(SwingFXUtils.toFXImage(this.image, null));
-            this.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
-            
-
+            this.currentView.setOnMousePressed(MiscUtils.assignListener(this));
         } catch (IOException e) {
             MiscUtils.fileNotFound();
         }
@@ -27,10 +23,11 @@ public class DangerousBomb extends Bomb{
 	
 	@Override
 	public void slice() {
-		System.out.println("#############################################################");
 		this.isSliced = true;
 		Game game = Game.getInstance();
+		game.bombSliceSound();
 		game.setLives(game.getLives()-1);
+		game.changeLivesLabel(game.getLives()+"");
 		if(game.getLives() < 1) {
 			game.gameOver();
 		}

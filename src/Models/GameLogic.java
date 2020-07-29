@@ -10,62 +10,84 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GameLogic implements GameActions {
 	
-
-	private GameProperties gameProperties=new GameProperties();
-	protected ArrayList<GameObject> objectsList;
-	protected static float speedFactor=1;
+	protected static float speedFactor= 1;
 
 	// This member will be used by the controller to  determine file to save in it or load from it --MO2--
 	private String targetFileName;
-
-	public GameProperties getGameProperties() {
-		return gameProperties;
+	private FruitFactory fruitFactory;
+	private BombFactory bombFactory;
+	
+	public GameLogic () {
+		fruitFactory = new FruitFactory();
+		bombFactory = new BombFactory();
 	}
-
-	public ArrayList<GameObject> getGameObjects()
-	{
-		return objectsList;
-	}
-
 
 	@Override
 	public GameObject createGameObject() {
 
-		GameObjectfactory factory;
 		GameObject obj;
 		int index = (int) MiscUtils.rand(0, 7);
 		GameObjects object = GameObjects.values()[index];
 		if (index < 5) {
-			factory = new FruitFactory();
-			obj = factory.createObject(object);
+			obj = fruitFactory.createObject(object);
 		} else {
-			factory = new BombFactory();
-			obj = factory.createObject(object);
+			obj = bombFactory.createObject(object);
 		}
-		//System.out.println(index);
 		return obj;
 	}
 
 
 	@Override
 	public void updateObjectsLocation() {
-		
-		ArrayList<GameObject> list=Game.getInstance().getList();
-		for(GameObject object:list)
+		Game game = Game.getInstance();
+		ArrayList<GameObject> list= game.getList();
+		for(Iterator<GameObject> itr = list.iterator(); itr.hasNext();)
+		{
+			GameObject object = itr.next();
 			object.move(System.currentTimeMillis());
-		
+			if (object.hasMovedOffScreen()) {
+				if (!object.isSliced() && !(object.getClass().equals(DangerousBomb.class) 
+						|| object.getClass().equals(FatalBomb.class)) && game.getMode()) {
+					game.setLives(game.getLives()-1);
+					if (game.getLives() < 1) {
+						game.gameOver();
+					}
+					game.changeLivesLabel(game.getLives() + "");
+				}
+				itr.remove();
+			}
+		}
 	}
-
+	
 	@Override
 	public void sliceObjects() {
 		
 		ArrayList<GameObject> list = Game.getInstance().getList();
 		for (GameObject object : list) {
-			if (!(object.getClass().equals(Bomb.class) || object.isSliced()))
+			if (!(object.getClass().equals(DangerousBomb.class) || object.getClass().equals(FatalBomb.class) || object.isSliced()))
 				object.slice();
+		}
+
+	}
+	
+	public void addDelayTime(double delayTime) {
+		
+		ArrayList<GameObject> list = Game.getInstance().getList();
+		for (GameObject object : list) {
+			object.eq.addDelayTime(delayTime);
+		}
+
+	}
+	
+	public void setSlowMotionDelayTime() {
+		
+		ArrayList<GameObject> list = Game.getInstance().getList();
+		for (GameObject object : list) {
+			object.setSlowMotionDelayTime(System.currentTimeMillis());
 		}
 
 	}
@@ -73,10 +95,9 @@ public class GameLogic implements GameActions {
 	@Override
 	public void saveGame() {
 		
-		this.targetFileName = "file1.xml"; 
 		String sep = System.getProperty("file.separator");
 		String xmlFilePath = System.getProperty("user.dir") + sep + "saved_data" + sep + targetFileName;
-		
+		Game game = Game.getInstance();
 		DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 		try {
 	        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
@@ -85,19 +106,36 @@ public class GameLogic implements GameActions {
 	        document.appendChild(root);
 	        
 	        Element score = document.createElement("Score");
-	        score.appendChild(document.createTextNode(gameProperties.getScore() + ""));
+	        score.appendChild(document.createTextNode(game.getScore() + ""));
 	        root.appendChild(score);
 	
 	        Element lives = document.createElement("Lives");
-	        lives.appendChild(document.createTextNode(gameProperties.getLives() + ""));
+	        lives.appendChild(document.createTextNode(game.getLives() + ""));
 	        root.appendChild(lives);
-	
+	        
+	        Element diff = document.createElement("Difficulty");
+	        diff.appendChild(document.createTextNode(game.getDifficulty() + ""));
+	        root.appendChild(diff);
+	        
+	        Element mode = document.createElement("Mode");
+	        mode.appendChild(document.createTextNode(game.getMode() + ""));
+	        root.appendChild(mode);
+	        
+	        Element remainingTime = document.createElement("RemainingTime");
+	        remainingTime.appendChild(document.createTextNode(game.getRemainingTime() + ""));
+	        root.appendChild(remainingTime);
+	        
 	        Element gameObjects = document.createElement("GameObjects");
 	        Element gameObject;
-	        for(GameObject obj: objectsList) {
+	        ArrayList<GameObject> list = Game.getInstance().getList();
+	        for(GameObject obj: list) {
 	        	gameObject = document.createElement("GameObject");
-	        	gameObject.appendChild(document.createTextNode(obj.getObjectType().toString()));
-	        	Attr attr = document.createAttribute("x");
+	        	
+	        	Attr attr = document.createAttribute("type");
+	            attr.setValue(obj.getObjectType().toString());
+	            gameObject.setAttributeNode(attr);
+	        	
+	        	attr = document.createAttribute("x");
 	            attr.setValue(obj.getXLocation()+"");
 	            gameObject.setAttributeNode(attr);
 	        	
@@ -105,10 +143,38 @@ public class GameLogic implements GameActions {
 	            attr.setValue(obj.getYLocation()+"");
 	            gameObject.setAttributeNode(attr);
 	            
+	            Element eq = document.createElement("Equation");
+	            
+	            attr = document.createAttribute("initialSpeed");
+	            attr.setValue(obj.getInitialVelocity()+"");
+	            eq.setAttributeNode(attr);
+	            
+	            attr = document.createAttribute("projectionAngle");
+	            attr.setValue(obj.eq.getProjectionAngle()+"");
+	            eq.setAttributeNode(attr);
+	            
+	            attr = document.createAttribute("startPoint");
+	            attr.setValue(obj.eq.getStartPoint()+"");
+	            eq.setAttributeNode(attr);
+	            
+	            attr = document.createAttribute("playedTime");
+	            attr.setValue(obj.getPlayedTime()+"");
+	            eq.setAttributeNode(attr);
+	            
+	            gameObject.appendChild(eq);
+	            
+	            Element Decorator = document.createElement("Decorator");
+	            if (obj.getClass().equals(ScoreDecorator.class) || obj.getClass().equals(SliceAllDecorator.class) 
+	            		|| obj.getClass().equals(SlowDownDecorator.class)) {
+	            	Decorator.appendChild(document.createTextNode(obj.getClass().getSimpleName()));
+	            }
+	            else {
+	            	Decorator.appendChild(document.createTextNode("None"));
+	            }
+	            gameObject.appendChild(Decorator);
 	            gameObjects.appendChild(gameObject);
 	        }
-	        root.appendChild(gameObjects);
-	        
+	        root.appendChild(gameObjects);  
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer;
 			transformer = transformerFactory.newTransformer();
@@ -120,58 +186,85 @@ public class GameLogic implements GameActions {
 			MiscUtils.fileNotFound();
 		}
 
-        System.out.println("Done creating XML File");
 	}
 
 	@Override
 	public void loadGame() {
-		this.targetFileName = "file1.xml";
 		String sep = System.getProperty("file.separator");
 		String xmlFilePath = System.getProperty("user.dir") + sep + "saved_data" + sep + targetFileName;
+		Game game = Game.getInstance();
 		try {
 			File file = new File(xmlFilePath);    
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
 	        Document document = documentBuilder.parse(file);  
 			document.getDocumentElement().normalize();  
-			System.out.println("Root element: " + document.getDocumentElement().getNodeName());
-			System.out.println("Score: " + document.getElementsByTagName("Score").item(0).getTextContent());
-			System.out.println("Lives: " + document.getElementsByTagName("Lives").item(0).getTextContent());
+			game.setScore(Integer.parseInt(document.getElementsByTagName("Score").item(0).getTextContent()));
+			game.setLives(Integer.parseInt(document.getElementsByTagName("Lives").item(0).getTextContent()));
+			game.setDifficulty(Integer.parseInt(document.getElementsByTagName("Difficulty").item(0).getTextContent()));
+			game.setMode(Boolean.parseBoolean(document.getElementsByTagName("Mode").item(0).getTextContent()));
+			game.setRemainingTime(Integer.parseInt(document.getElementsByTagName("RemainingTime").item(0).getTextContent()));
 			NodeList nodeList = document.getElementsByTagName("GameObject");    
 			for (int itr = 0; itr < nodeList.getLength(); itr++)   
 			{  
 				Node node = nodeList.item(itr);  
 				Element eElement = (Element) node;
-				// Create Object here --MO2--
-				GameObjects objectType = GameObjects.valueOf(eElement.getTextContent());
-				System.out.println("Type: "+ objectType);
-				System.out.println("X: "+ eElement.getAttribute("x"));
-				System.out.println("Y: "+ eElement.getAttribute("y"));
-				// Then add this object to the objectsList --MO2--
+				// Create Object here
+				int objectType = GameObjects.valueOf(eElement.getAttribute("type")).ordinal();
+				int x = Integer.parseInt(eElement.getAttribute("x"));
+				int y = Integer.parseInt(eElement.getAttribute("y"));
+				Element equation = (Element) eElement.getElementsByTagName("Equation").item(0);
+				float initialSpeed = Float.parseFloat(equation.getAttribute("initialSpeed").toString());
+				double projectionAngle = Double.parseDouble(equation.getAttribute("projectionAngle").toString());
+				float startPoint = Float.parseFloat(equation.getAttribute("startPoint").toString());
+				double playedTime = Double.parseDouble(equation.getAttribute("playedTime").toString());
+				GameObject obj;
+				if (objectType < 5) {
+					obj = fruitFactory.createObject(GameObjects.values()[objectType]);
+				} else {
+					obj = bombFactory.createObject(GameObjects.values()[objectType]);
+				}
+				obj.getImageView().setLayoutX(x);
+				obj.getImageView().setLayoutY(y);
+				obj.startingTime = System.currentTimeMillis() - playedTime;
+				obj.setEq(new Equation(Game.screenHeight, Game.screenWidth, initialSpeed,
+	            projectionAngle, startPoint));
+				
+				String Decorator = eElement.getElementsByTagName("Decorator").item(0).getTextContent();
+				
+				// Then add this object to the objectsList
+				if (Decorator.equals("None")) {
+					game.getList().add(obj);
+				}
+				else if(Decorator.equals("ScoreDecorator")) {
+					game.getList().add(new ScoreDecorator(obj));
+				}
+				else if(Decorator.equals("SliceAllDecorator")) {
+					game.getList().add(new SliceAllDecorator(obj));
+				}
+				else if(Decorator.equals("SlowDownDecorator")) {
+					game.getList().add(new SlowDownDecorator(obj));
+				}
 			}  
-			// Then call Start function here
+			
+			
 		}   
 		catch (Exception e)   
 		{  
 			e.printStackTrace();  
+			MiscUtils.fileNotFound();
 		} 
 	}
 
 	@Override
 	public void resetGame() {
-		this.gameProperties.setLives(3);
-		this.gameProperties.setScore(0);
-		// And reset the time member if it's implemented
-		// Then call Start function here --MO2--
+		Game.getInstance().setLives(3);
+		Game.getInstance().setScore(0);
+		Game.getInstance().getList().clear();
+		Game.getInstance().setPause(false);
 	}
-
-	public String[] showSavedFiles() {
-		String[] files = null;
-		String sep = System.getProperty("file.separator");
-		File file = new File(System.getProperty("user.dir") + sep + "saved_data");
-		if (file.exists()) {
-			files = file.list();
-		}
-		return files;
+	
+	public void setTargetFile(String targetFile) {
+		this.targetFileName = targetFile;
 	}
 }

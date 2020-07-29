@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Game><Score>9</Score><Lives>2</Lives><Difficulty>3</Difficulty><Mode>true</Mode><GameObjects><GameObject type="Banana" x="968" y="521"><Equation initialSpeed="402" playedTime="1326.456219331145" projectionAngle="0.6515480133690794" startPoint="544.0"/><Decorator>None</Decorator></GameObject></GameObjects></Game>

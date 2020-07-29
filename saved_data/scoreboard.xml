@@ -4,6 +4,12 @@
   <void property="scoreBoard">
    <void method="add">
     <object class="Models.Player">
+     <void property="diff">
+      <string>Easy</string>
+     </void>
+     <void property="mode">
+      <string>Normal</string>
+     </void>
      <void property="name">
       <string>momen</string>
      </void>
@@ -14,6 +20,12 @@
    </void>
    <void method="add">
     <object class="Models.Player">
+     <void property="diff">
+      <string>Medium</string>
+     </void>
+     <void property="mode">
+      <string>Normal</string>
+     </void>
      <void property="name">
       <string>mariam</string>
      </void>
@@ -24,6 +36,12 @@
    </void>
    <void method="add">
     <object class="Models.Player">
+     <void property="diff">
+      <string>Medium</string>
+     </void>
+     <void property="mode">
+      <string>Arcade</string>
+     </void>
      <void property="name">
       <string>ahmad</string>
      </void>
@@ -34,6 +52,12 @@
    </void>
    <void method="add">
     <object class="Models.Player">
+     <void property="diff">
+      <string>Hard</string>
+     </void>
+     <void property="mode">
+      <string>Normal</string>
+     </void>
      <void property="name">
       <string>asmaa</string>
      </void>

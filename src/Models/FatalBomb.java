@@ -13,12 +13,9 @@ public class FatalBomb extends Bomb{
 	public FatalBomb() {
 		this.objectType = GameObjects.FatalBomb;
         try {
-            this.image = ImageIO.read(new File("src/resources/fruits/apple.png"));
-            this.image_left = ImageIO.read(new File("src/resources/fruits/apple_right.png"));
-            this.image_right = ImageIO.read(new File("src/resources/fruits/apple_left.png"));
+            this.image = ImageIO.read(new File("src/resources/bombs/Fatal_Bomb.png"));
             this.currentView = new ImageView(SwingFXUtils.toFXImage(this.image, null));
-            this.currentView.setOnMouseClicked(MiscUtils.assignListener(this));
-
+            this.currentView.setOnMousePressed(MiscUtils.assignListener(this));
         } catch (IOException e) {
             MiscUtils.fileNotFound();
         }
@@ -27,6 +24,7 @@ public class FatalBomb extends Bomb{
 	@Override
 	public void slice() {
 		this.isSliced = true;
+		Game.getInstance().bombSliceSound();
 		Game.getInstance().gameOver();
 	}
 

@@ -13,14 +13,12 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
     protected boolean isSliced = false;
     protected GameObjects objectType;
     protected Equation eq;
-    private final double startingTime;
+    protected double startingTime;
    
 
     public GameObject() {
         startingTime = System.currentTimeMillis();
     }
-
-   
 
     @Override
     public GameObjects getObjectType() {
@@ -35,7 +33,6 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
     @Override
     public int getYLocation() {
         return (int) currentView.getLayoutY();
-
     }
 
     @Override
@@ -62,7 +59,7 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
     @Override
     public boolean hasMovedOffScreen() {
         int[] arr = eq.getScreenSize();
-        return getImageView().getLayoutX() > arr[1] || getImageView().getLayoutY() > arr[0];
+        return getImageView().getLayoutX() > (arr[1] + 50) || getImageView().getLayoutY() > (arr[0] + 50);
     }
 
     @Override
@@ -82,7 +79,7 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
         getImageView().setLayoutX(p.x);
         getImageView().setLayoutY(p.y);
     }
-
+    
     @Override
     public BufferedImage[] getBufferedImage() {
         BufferedImage[] bufferedImages = new BufferedImage[4];
@@ -117,5 +114,13 @@ abstract public class GameObject implements Models.Interfaces.GameObject {
 
     public void setEq(Equation eq) {
         this.eq = eq;
+    }
+    
+    public void setSlowMotionDelayTime(double time) {
+    	this.eq.setSlowMotionDelayTime(time - startingTime, (int) this.currentView.getLayoutX());
+    }
+    
+    public double getPlayedTime() {
+    	return this.eq.getPlayedTime((int) this.currentView.getLayoutX());
     }
 }

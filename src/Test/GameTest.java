@@ -4,7 +4,7 @@ import Models.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GameTest extends Application {
@@ -18,14 +18,17 @@ public class GameTest extends Application {
     @Override
     public void start(Stage primaryStage) {
  
-        Pane root = new Pane();
-        game.start(root);
+        AnchorPane root = new AnchorPane();
+        //game.start(root, true);
 
+        game.getGameLogic().loadGame();
+		game.start(root, false, 1);
         Button p=new Button();
         p.setText("Pause");
 		root.getChildren().add(p);
 		p.setOnAction(e->{
-			game.setPause(true);
+			game.getGameLogic().saveGame();
+			game.stop();
 		});
 		Button r=new Button();
 		r.setLayoutX(800);
@@ -33,7 +36,6 @@ public class GameTest extends Application {
         r.setText("Resume");
 		root.getChildren().add(r);
 		r.setOnAction(e->{
-			game.setPause(false);
 	        game.resume();
 		});
         Scene scene = new Scene(root, 1200, 800);

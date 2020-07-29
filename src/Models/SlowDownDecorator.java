@@ -11,6 +11,7 @@ public class SlowDownDecorator extends FruitDecorator {
 
 	public void slice() {
 		specialFruit.slice();
+		Game.getInstance().flashScreen();
 		new java.util.Timer().schedule( 
 		        new java.util.TimerTask() {
 		        	int i=0;
@@ -18,12 +19,11 @@ public class SlowDownDecorator extends FruitDecorator {
 		            public void run() {
 		            	i++;
 		                GameLogic.speedFactor=(float) 0.2;
-		                System.out.println(GameLogic.speedFactor);
-		                System.out.println("Slow mode Running");
 		                if(i>4) {
 		                cancel();
+		                Game.getInstance().getGameLogic().setSlowMotionDelayTime();
 		                GameLogic.speedFactor=(float) 1.0;
-		                System.out.println(GameLogic.speedFactor);
+		                Game.getInstance().flashScreen();
 		                }
 		            } 
 		        }, 

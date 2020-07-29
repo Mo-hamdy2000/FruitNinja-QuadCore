@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="345.0" prefWidth="276.0" styleClass="modal" stylesheets="@../resources/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameModalController">
+   <children>
+      <VBox layoutX="60.0" layoutY="20.0" prefHeight="311.0" prefWidth="156.0">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="309.0" onMouseClicked="#resumeGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/resume.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="71.0" fitWidth="309.0" onMouseClicked="#restartGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/Restart.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="130.0" fitWidth="156.0" onMouseClicked="#saveGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/Save.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="71.0" fitWidth="309.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/Exit.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

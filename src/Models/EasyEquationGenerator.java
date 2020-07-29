@@ -13,7 +13,7 @@ public class EasyEquationGenerator implements EquationGenerator {
 	
 	@Override
 	public Equation generateEquation() {
-		int initialSpeed = (int) ((int) MiscUtils.rand(186, 200));
+		int initialSpeed = (int) ((int) MiscUtils.rand(287, 327));
 		int startPoint = (int) MiscUtils.rand(0, screenWidth / 2);
 		double maxAngle = Math.asin(Math.sqrt((2 * Equation.gravityFactor * screenHeight) / (initialSpeed * initialSpeed)));
 		double projectionAngle = MiscUtils.rand(Math.PI / 3, maxAngle);

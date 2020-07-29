@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="247.0" prefWidth="443.0" styleClass="modal" stylesheets="@../resources/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.NameModalController">
+   <children>
+      <TextField fx:id="nameTxt" layoutX="65.0" layoutY="108.0" prefHeight="31.0" prefWidth="314.0" promptText="Enter your name" />
+      <ImageView fitHeight="67.0" fitWidth="166.0" layoutX="281.0" layoutY="166.0" onMouseClicked="#doneClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/Done.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="107.0" layoutY="35.0" text="Enter your name" textFill="WHITE">
+         <font>
+            <Font name="Viner Hand ITC" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

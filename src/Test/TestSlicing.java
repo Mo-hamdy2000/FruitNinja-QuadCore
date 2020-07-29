@@ -1,7 +1,6 @@
 package Test;
 
 import Models.*;
-import Models.Interfaces.GameObject;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,8 +11,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestSlicing extends Application {
 
@@ -49,14 +46,14 @@ public class TestSlicing extends Application {
         EasyEquationGenerator eg = new EasyEquationGenerator(1000, 500);
         Equation eq = eg.generateEquation();
         pineapple.setEq(eq);
-        game.getGameObjects().add(pineapple);
+        /*game.getGameObjects().add(pineapple);
         game.getGameObjects().add(apple);
         game.getGameObjects().add(orange);
 
         speed = 1;
         falling = 500;
 
-        root.getChildren().add(((Fruit)game.getGameObjects().get(0)).getImageView());
+        root.getChildren().add(((Fruit)game.getGameObjects().get(0)).getImageView());*/
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(falling), event -> {
 
@@ -98,9 +95,9 @@ public class TestSlicing extends Application {
     Point p;
 
     public void gameUpdate(Equation eq) {
-
+    	/*
         Fruit w = (Fruit) game.getGameObjects().get(0);
         w.move(System.currentTimeMillis());
-
+	*/
     }
 }

@@ -1,19 +1,12 @@
 package Test;
  
 import Models.*;
-import Models.Interfaces.GameObject;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
- 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
  
 public class TestSlicing1 extends Application {
  
@@ -62,8 +55,8 @@ public class TestSlicing1 extends Application {
  
         root.getChildren().add(((Fruit)game.getGameObjects().get(0)).getImageView());*/
  
-        Pane root = new Pane();
-        game.start(root);
+        AnchorPane root = new AnchorPane();
+        game.start(root, true, 1);
         /*Timeline timeline = new Timeline(new KeyFrame(Duration.millis(500), event -> {
  
             speed += falling / 3000;

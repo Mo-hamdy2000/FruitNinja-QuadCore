@@ -8,6 +8,6 @@ public class SliceAllDecorator extends FruitDecorator {
 
 	public void slice() {
 		specialFruit.slice();
-		Game.getInstance().gameLogic.sliceObjects();
+		Game.getInstance().getGameLogic().sliceObjects();
 	}
 }

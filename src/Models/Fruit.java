@@ -7,7 +7,9 @@ public abstract class Fruit extends GameObject {
     @Override
     public void slice() {
         this.isSliced = true;
-		GameLogic gameLogic =new GameLogic();
-        gameLogic.getGameProperties().incrementScore(score);
+        Game game = Game.getInstance();
+        game.fruitSliceSound();
+		game.incrementScore(score);
+		game.changeScoreLabel(game.getScore() + "");
     }
 }

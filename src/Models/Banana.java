@@ -15,10 +15,7 @@ public class Banana extends Fruit {
             this.image_left = ImageIO.read(new File("src/resources/fruits/banana_left.png"));
             this.image_right = ImageIO.read(new File("src/resources/fruits/banana_right.png"));
             this.currentView = new ImageView(SwingFXUtils.toFXImage(this.image, null));
-            this.currentView.setOnMouseEntered(MiscUtils.assignListener(this));
-            System.out.println(this);
-
-
+            this.currentView.setOnMousePressed(MiscUtils.assignListener(this));
         } catch (IOException e) {
             MiscUtils.fileNotFound();
         }

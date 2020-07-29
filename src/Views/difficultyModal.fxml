@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="583.0" prefWidth="617.0" styleClass="modal" stylesheets="@../resources/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DifficultyModalController">
+   <children>
+      <ImageView fx:id="easy" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="477.0" onMouseClicked="#difficultySelected" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/EasyButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="medium" fitHeight="150.0" fitWidth="200.0" layoutX="209.0" layoutY="477.0" onMouseClicked="#difficultySelected" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/MediumButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="hard" fitHeight="150.0" fitWidth="200.0" layoutX="403.0" layoutY="477.0" onMouseClicked="#difficultySelected" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/HardButton.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

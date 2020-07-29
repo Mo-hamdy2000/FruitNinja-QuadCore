@@ -9,8 +9,7 @@ public class ScoreDecorator extends FruitDecorator {
 	
 	public void slice() {
 		specialFruit.slice();
-		GameLogic gameLogic =new GameLogic();
-		gameLogic.getGameProperties().incrementScore(specialFruit.score);
-		System.out.println(gameLogic.getGameProperties().getScore());
+		Game.getInstance().incrementScore(specialFruit.score * 5);
+		Game.getInstance().changeScoreLabel(Game.getInstance().getScore()+"");
 	}
 }
